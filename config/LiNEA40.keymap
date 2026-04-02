@@ -2,6 +2,7 @@
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -53,12 +54,13 @@
 };
 
 &trackball_listener {
+    input-processors = <&mouse_runtime_input_processor>;
     scroller {
         layers = <SCROLL>;
-        input-processors =
+input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転
-            <&zip_xy_to_scroll_mapper>;
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>;
     };
 };
 
