@@ -55,9 +55,10 @@
 
 &trackball_listener {
     input-processors = <&mouse_runtime_input_processor>;
+
     scroller {
         layers = <SCROLL>;
-input-processors =
+        input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             <&zip_xy_to_scroll_mapper>,
             <&scroll_runtime_input_processor>;
@@ -138,10 +139,10 @@ input-processors =
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB4  &trans    &mkp MB5  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans    &trans    &lt 5 SLASH
             >;
         };
 
@@ -196,7 +197,6 @@ input-processors =
         };
 
         //6
-
 
         WIRELESS {
             bindings = <
