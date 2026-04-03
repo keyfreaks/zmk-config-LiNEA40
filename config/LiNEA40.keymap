@@ -65,55 +65,69 @@
     };
 };
 
-/ {
-    combos {
-        compatible = "zmk,combos";
+/ {combos {
+    compatible = "zmk,combos";
 
-        ZenkakuHankaku {
-            bindings = <&kp INT1>;
-            key-positions = <11 12>;
-        };
-
-        DeleteKey {
-            bindings = <&kp DEL>;
-            key-positions = <7 8>;
-        };
-
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
-
-        CenterClick {
-            bindings = <&mkp MB3>;
-            key-positions = <17 16>;
-        };
-
-        RightClick {
-            bindings = <&mkp MB2>;
-            key-positions = <18 17>;
-        };
-
-        PrevClick {
-            bindings = <&mkp MB4>;
-            key-positions = <27 28>;
-        };
-
-        ClickNext {
-            bindings = <&mkp MB5>;
-            key-positions = <26 27>;
-        };
-
-        esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <0 1>;
-        };
-
-        win {
-            bindings = <&kp LEFT_WIN>;
-            key-positions = <31 32>;
-        };
+    ZenkakuHankaku {
+        bindings = <&kp GRAVE>;
+        key-positions = <11 12>;
     };
+
+    DeleteKey {
+        bindings = <&kp DEL>;
+        key-positions = <8 9>;
+    };
+
+    InsertKey {
+        bindings = <&kp INS>;
+        key-positions = <6 7>;
+    };
+
+    CenterClick {
+        bindings = <&mkp MB3>;
+        key-positions = <17 16>;
+    };
+
+    RightClick {
+        bindings = <&mkp MB2>;
+        key-positions = <18 17>;
+    };
+
+    PrevClick {
+        bindings = <&mkp MB4>;
+        key-positions = <27 28>;
+    };
+
+    ClickNext {
+        bindings = <&mkp MB5>;
+        key-positions = <26 27>;
+    };
+
+    BackspaceKey {
+        bindings = <&kp BACKSPACE>;
+        key-positions = <9 19>;
+    };
+
+    EnterKey {
+        bindings = <&kp ENTER>;
+        key-positions = <19 29>;
+    };
+
+    DeleteKey2 {
+        bindings = <&kp DEL>;
+        key-positions = <10 20>;
+    };
+
+    CommaKey {
+        bindings = <&kp COMMA>;
+        key-positions = <16 17>;
+    };
+
+    PeriodKey {
+        bindings = <&kp PERIOD>;
+        key-positions = <6 7>;
+    };
+};
 
     behaviors {
         re_kp: sensor_rotate_kp {
