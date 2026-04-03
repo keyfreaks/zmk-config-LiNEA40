@@ -17,6 +17,7 @@
 
 //mouse cursol
 
+
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
