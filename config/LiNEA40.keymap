@@ -135,7 +135,9 @@
             bindings
                 = <&kp n &kp o &kp m &kp u &kp r &kp a &kp _ &kp 6 &kp 8 &kp 9 &kp 0>;
         };
+ };
 
+/ {
     keymap {
         compatible = "zmk,keymap";
 
