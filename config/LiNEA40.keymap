@@ -58,7 +58,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,
+            //スクロール方向を逆転,,,,,,,
             <&zip_xy_to_scroll_mapper>;
 
         input-processors = <&mouse_runtime_input_processor>;
@@ -112,7 +112,7 @@
             bindings = <
 &kp Q             &kp W             &kp E           &kp R    &kp T                                              &kp Y        &kp U  &kp I                &kp O          &kp P
 &kp A             &kp S             &kp D           &kp F    &kp G                                              &kp H        &kp J  &kp K                &kp L          &lt 5 BACKSPACE
-&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                              &kp N        &kp M  &mkp MB1             &mkp MB2       &mt RIGHT_SHIFT BACKSPACE
+&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                              &kp N        &kp M  &mkp MB1             &mkp MB2       &lt 2 BACKSPACE
 &mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 LANGUAGE_1    &lt 2 LANGUAGE_2  &lt 4 ENTER         &lt 6 RIGHT_BRACKET  &kp BACKSLASH  &mt RIGHT_SHIFT SLASH
             >;
 
@@ -134,10 +134,10 @@
 
         NUMB {
             bindings = <
-&kp ASTERISK  &kp PLUS   &kp N7     &kp N8  &kp N9                           &kp CARET     &kp AMPERSAND  &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LBKT
-&kp PERIOD    &kp N0     &kp N4     &kp N5  &kp N6                           &kp C_MUTE    &kp LS(LBKT)   &kp RIGHT_BRACKET      &kp BACKSLASH         &kp EQUAL
-&kp SLASH     &kp MINUS  &kp N1     &kp N2  &kp N3                           &kp KP_EQUAL  &kp INT3       &kp LS(RIGHT_BRACKET)  &kp LS(BACKSLASH)     &kp LS(INT1)
-&trans        &trans     &kp EQUAL  &trans  &trans  &kp BACKSPACE    &trans  &trans                       &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LS(QUESTION)
+&kp ASTERISK  &kp PLUS   &kp N7     &kp N8  &kp N9                           &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH     &kp DOLLAR       &kp AT_SIGN
+&kp PERIOD    &kp N0     &kp N4     &kp N5  &kp N6                           &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PERCENT  &kp AMPERSAND    &kp UNDERSCORE
+&kp SLASH     &kp MINUS  &kp N1     &kp N2  &kp N3                           &kp LESS_THAN         &kp GREATER_THAN       &kp QMARK    &kp EXCLAMATION  &kp LS(INT1)
+&trans        &trans     &kp EQUAL  &trans  &trans  &kp BACKSPACE    &trans  &trans                                       &trans       &trans           &kp LS(QUESTION)
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
