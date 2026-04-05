@@ -8,6 +8,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+#include <input/processors/runtime-input-processor.dtsi>
+
 #define MOUSE 1
 #define MARK 2
 #define CURSOR 3
@@ -61,6 +63,10 @@
             //スクロール方向を逆転
             <&zip_xy_to_scroll_mapper>;
     };
+};
+
+&trackball_listener {
+    input-processors = <&mouse_runtime_input_processor>;
 };
 
 / {
