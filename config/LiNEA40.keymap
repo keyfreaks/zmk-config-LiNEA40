@@ -58,7 +58,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,
+            //スクロール方向を逆転,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
 
         input-processors = <&mouse_runtime_input_processor>;
@@ -86,6 +86,26 @@
         bs {
             bindings = <&kp BACKSPACE>;
             key-positions = <8 9>;
+        };
+
+        pirri {
+            bindings = <&kp PERIOD>;
+            key-positions = <7 8>;
+        };
+
+        conma {
+            bindings = <&kp COMMA>;
+            key-positions = <17 18>;
+        };
+
+        win {
+            bindings = <&kp LEFT_WIN>;
+            key-positions = <31 32>;
+        };
+
+        del {
+            bindings = <&kp DELETE>;
+            key-positions = <4 3>;
         };
     };
 
