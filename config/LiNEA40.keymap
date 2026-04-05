@@ -127,28 +127,28 @@
 
 / {
     macros {
-        // "nomura_6980" と入力するマクロ
+        // "nomura_6980" 
         mcr01: mcr01 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             tap-ms = <30>;
             wait-ms = <30>;
             bindings
-                = <&kp M>           // 'n' を入力
-                , <&kp O>          // 'o' を入力
-                , <&kp M>          // 'm' を入力
-                , <&kp U>          // 'u' を入力
-                , <&kp R>          // 'r' を入力
-                , <&kp A>          // 'a' を入力
-                , <&kp LS(MINUS)>   // '_' を入力（Shift + Minus）
-                , <&kp N6>          // '6' を入力
-                , <&kp N9>          // '9' を入力
-                , <&kp N8>          // '8' を入力
-                , <&kp N0>          // '0' を入力
+                = <&kp M>           // 'n'
+                , <&kp O>          // 'o'
+                , <&kp M>          // 'm'
+                , <&kp U>          // 'u'
+                , <&kp R>          // 'r'
+                , <&kp A>          // 'a'
+                , <&kp LS(MINUS)>   // '_'
+                , <&kp N6>          // '6' 
+                , <&kp N9>          // '9'
+                , <&kp N8>          // '8'
+                , <&kp N0>          // '0'
                 ;
-        };
-　　 };
- };
+              };
+　　      };
+};
 
 / {
     keymap {
