@@ -126,13 +126,15 @@
     };
 
     macros {
+        // "nomura_6980" と入力するマクロ
         mcr01: mcr01 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp NUMBER_1>;
-            label = "MCR01";
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings
+                = <&kp n &kp o &kp m &kp u &kp r &kp a &kp _ &kp 6 &kp 8 &kp 9 &kp 0>;
         };
-    };
 
     keymap {
         compatible = "zmk,keymap";
@@ -200,7 +202,7 @@
 
         SCROLL {
             bindings = <
-&kp NUMBER_1  &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                    &kp KP_MULTIPLY  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp KP_PLUS
+&mcr01        &kp LC(LG(LEFT_ARROW))  &kp UP_ARROW  &kp LC(LG(RIGHT_ARROW))  &trans                    &kp KP_MULTIPLY  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp KP_PLUS
 &trans        &kp LEFT_ARROW          &kp DOWN      &kp RIGHT_ARROW          &trans                    &kp KP_SLASH     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp KP_MINUS
 &kp HOME      &kp PAGE_DOWN           &kp END       &kp PAGE_UP              &trans                    &kp UNDER        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp ENTER
 &trans        &trans                  &trans        &trans                   &trans  &trans    &trans  &kp NUMBER_0                   &kp NUMBER_0  &kp DOT       &kp QUESTION
