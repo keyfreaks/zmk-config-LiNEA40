@@ -9,7 +9,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-
 #define MOUSE 1
 #define NUMB 2
 #define CURSOR 3
@@ -33,26 +32,6 @@
     trigger-period-ms = <3>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <0>;
-};
-
-/ {
-    input_processors {
-        zip_wheel_scaler: zip_wheel_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL>;
-            track-remainders;
-        };
-
-        zip_xy_scaler: zip_xy_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_X INPUT_REL_Y>;
-            track-remainders;
-        };
-    };
 };
 
 &msc_input_listener {
@@ -80,7 +59,6 @@
             <&scroll_runtime_input_processor>;
     };
 };
-
 
 / {
     combos {
