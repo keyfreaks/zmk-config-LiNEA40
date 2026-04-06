@@ -16,8 +16,7 @@
 #define SCROLL 5
 #define WIRELESS 6
 
-//mouse cursol
-
+// mouse cursor
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
@@ -25,8 +24,7 @@
     acceleration-exponent = <2>;
 };
 
-//mouse scroll
-
+// mouse scroll
 &msc {
     delay-ms = <3>;
     trigger-period-ms = <3>;
@@ -35,6 +33,13 @@
 };
 
 / {
+    // センサー定義（ここだけにまとめました）
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder &right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
     input_processors {
         zip_wheel_scaler: zip_wheel_scaler {
             compatible = "zmk,input-processor-scaler";
@@ -44,97 +49,20 @@
             track-remainders;
         };
     };
-};
 
-&msc_input_listener {
-    speed_up {
-        layers = <FUNCTION>;
-        input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
-    };
-};
-
-&trackball_listener {
-    scroller {
-        layers = <SCROLL>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_to_scroll_mapper>,
-            <&scroll_runtime_input_processor>;
-    };
-
-    boost {
-        layers = <7>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_scaler 3 2>,
-            <&zip_xy_to_scroll_mapper>,
-            <&scroll_runtime_input_processor>;
-    };
-};
-
-/ {
     combos {
         compatible = "zmk,combos";
-
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
-
-        esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <0 1>;
-        };
-
-        bs {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <8 9>;
-        };
-
-        pirri {
-            bindings = <&kp PERIOD>;
-            key-positions = <7 8>;
-        };
-
-        conma {
-            bindings = <&kp COMMA>;
-            key-positions = <6 7>;
-        };
-
-        win {
-            bindings = <&kp LEFT_WIN>;
-            key-positions = <31 32>;
-        };
-
-        del {
-            bindings = <&kp DELETE>;
-            key-positions = <4 3>;
-        };
-
-        mb3 {
-            bindings = <&mkp MB3>;
-            key-positions = <16 17>;
-        };
-
-        mb2 {
-            bindings = <&mkp MB2>;
-            key-positions = <17 18>;
-        };
-
-        LANG01 {
-            bindings = <&kp LANGUAGE_1>;
-            key-positions = <0 10>;
-        };
+        InsertKey { bindings = <&kp INS>; key-positions = <6 7>; };
+        esc { bindings = <&kp ESCAPE>; key-positions = <0 1>; };
+        bs { bindings = <&kp BACKSPACE>; key-positions = <8 9>; };
+        pirri { bindings = <&kp PERIOD>; key-positions = <7 8>; };
+        conma { bindings = <&kp COMMA>; key-positions = <6 7>; };
+        win { bindings = <&kp LEFT_WIN>; key-positions = <31 32>; };
+        del { bindings = <&kp DELETE>; key-positions = <4 3>; };
+        mb3 { bindings = <&mkp MB3>; key-positions = <16 17>; };
+        mb2 { bindings = <&mkp MB2>; key-positions = <17 18>; };
+        LANG01 { bindings = <&kp LANGUAGE_1>; key-positions = <0 10>; };
     };
-
-
-    // 【重要】センサー（エンコーダー）の有効化宣言
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <20>;
-    };
-
 
     behaviors {
         re_kp: sensor_rotate_kp {
@@ -142,23 +70,12 @@
             #sensor-binding-cells = <2>;
             bindings = <&kp>, <&kp>;
         };
-
         mouse_scrl: mouse_wheel_scrl {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
-
             tap-ms = <20>;
         };
-    };
-
-/ {
-    // センサー全体を管理するノード。
-    // keymap ノードの外側（同階層）に置くのが最新の正解です。
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <20>;
     };
 
     keymap {
@@ -203,5 +120,31 @@
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
+    };
+};
+
+// 以下のリスナー設定は keymap の外側に置く必要があります
+&msc_input_listener {
+    speed_up {
+        layers = <FUNCTION>;
+        input-processors = <&zip_wheel_scaler 3 1>;
+    };
+};
+
+&trackball_listener {
+    scroller {
+        layers = <SCROLL>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>;
+    };
+    boost {
+        layers = <7>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_scaler 3 2>,
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>;
     };
 };
