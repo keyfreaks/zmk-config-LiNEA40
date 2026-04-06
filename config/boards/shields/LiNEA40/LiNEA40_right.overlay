@@ -13,13 +13,6 @@
         ;
 };
 
-/ {
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-    };
-};
 
 
 &pinctrl {
@@ -65,6 +58,7 @@
 };
 
 &trackball_listener {
+    compatible = "zmk,input-listener";
     status = "okay";
     device = <&trackball>;
 };
