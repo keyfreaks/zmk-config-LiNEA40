@@ -15,6 +15,7 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
+#define layer_7 7 
 
 //mouse cursol
 
@@ -127,16 +128,15 @@
     };
 
 
-/ {
     // 【重要】センサー（エンコーダー）の有効化宣言
-    sensors: sensors {
+sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder &right_encoder>;
         triggers-per-rotation = <20>;
     };
 
 
-    behaviors {
+behaviors {
         re_kp: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
