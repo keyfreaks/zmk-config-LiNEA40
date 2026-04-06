@@ -45,7 +45,7 @@
             track-remainders;
         };
     };
-};
+
 
 &msc_input_listener {
     speed_up {
