@@ -46,31 +46,33 @@
         };
     };
 
-
-&msc_input_listener {
-    speed_up {
-        layers = <FUNCTION>;
-        input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
-    };
-};
-
-&trackball_listener {
-    scroller {
-        layers = <SCROLL>;
-        input-processors =
-            <&zip_xy_to_scroll_mapper>;
-            <&scroll_runtime_input_processor>;
+    msc_input_listener: msc_input_listener {
+        speed_up {
+            layers = <FUNCTION>;
+            input-processors = <&zip_wheel_scaler 3 1>;
+        };
     };
 
-    boost {
-        layers = <7>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
-            <&zip_xy_scaler 3 2>;
-            <&zip_xy_to_scroll_mapper>;
-            <&scroll_runtime_input_processor>;
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        scroller {
+            layers = <SCROLL>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_to_scroll_mapper>,
+                <&zip_xy_scaler 3 2>,
+                <&scroll_runtime_input_processor>;
+        };
+
+        boost {
+            layers = <7>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_scaler 3 2>,
+                <&zip_xy_to_scroll_mapper>,
+                <&scroll_runtime_input_processor>;
+        };
     };
-};
 
 
     combos {
@@ -128,13 +130,12 @@
     };
 
 
-    // 【重要】センサー（エンコーダー）の有効化宣言
+        // 【重要】センサー（エンコーダー）の有効化宣言
 sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder &right_encoder>;
         triggers-per-rotation = <20>;
     };
-
 
 behaviors {
         re_kp: sensor_rotate_kp {
@@ -241,8 +242,9 @@ behaviors {
 &studio_unlock  &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
+    };
 
         layer_7 {
             bindings = <
