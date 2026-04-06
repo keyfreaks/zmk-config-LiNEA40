@@ -8,9 +8,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/outputs.h>
 
-#define DEFAULT 0
 #define MOUSE 1
 #define NUMB 2
 #define CURSOR 3
@@ -18,13 +16,16 @@
 #define SCROLL 5
 #define WIRELESS 6
 
-// マウス感度・スクロール設定
+//mouse cursol
+
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <2>;
 };
+
+//mouse scroll
 
 &msc {
     delay-ms = <3>;
@@ -34,14 +35,6 @@
 };
 
 / {
-    // 1. センサー定義 (ルート直下に1つだけ配置)
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <20>;
-    };
-
-    // 2. 入力プロセッサ
     input_processors {
         zip_wheel_scaler: zip_wheel_scaler {
             compatible = "zmk,input-processor-scaler";
@@ -51,92 +44,12 @@
             track-remainders;
         };
     };
+};
 
-    // 3. コンボ設定
-    combos {
-        compatible = "zmk,combos";
-        InsertKey { bindings = <&kp INS>; key-positions = <6 7>; };
-        esc { bindings = <&kp ESCAPE>; key-positions = <0 1>; };
-        bs { bindings = <&kp BACKSPACE>; key-positions = <8 9>; };
-        pirri { bindings = <&kp PERIOD>; key-positions = <7 8>; };
-        conma { bindings = <&kp COMMA>; key-positions = <6 7>; };
-        win { bindings = <&kp LEFT_WIN>; key-positions = <31 32>; };
-        del { bindings = <&kp DELETE>; key-positions = <4 3>; };
-        mb3 { bindings = <&mkp MB3>; key-positions = <16 17>; };
-        mb2 { bindings = <&mkp MB2>; key-positions = <17 18>; };
-        LANG01 { bindings = <&kp LANGUAGE_1>; key-positions = <0 10>; };
-    };
-
-    // 4. 特殊な挙動定義
-    behaviors {
-        re_kp: sensor_rotate_kp {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            #sensor-binding-cells = <2>;
-            bindings = <&kp>, <&kp>;
-        };
-    };
-
-    // 5. キーマップ本体
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            bindings = <
-                &kp ESC   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
-                &kp TAB   &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp SQT
-                &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp ENTER
-                &kp LCTRL &kp LGUI  &kp LALT  &mo MOUSE &kp SPACE &none     &none     &kp SPACE &mo NUMB  &kp RALT  &kp RGUI  &kp RCTRL
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        mouse_layer {
-            bindings = <
-                &trans    &none          &mmv MOVE_UP   &none           &none     &none     &none     &none           &msc SCRL_UP    &none           &none     &kp DEL
-                &trans    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &none     &none     &none     &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT &none     &none
-                &trans    &none          &none          &none           &none     &none     &none     &none           &none           &none           &none     &trans
-                &trans    &trans         &trans         &trans          &mkp MB1  &none     &none     &mkp MB2        &mo CURSOR      &trans          &trans    &trans
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        numb_layer {
-            bindings = <
-                &kp GRAVE &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp DEL
-                &trans    &none     &none     &none     &none     &none     &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none     &none
-                &trans    &none     &none     &none     &none     &none     &none     &none     &none     &none     &none     &trans
-                &trans    &trans    &trans    &trans    &trans    &none     &none     &trans    &mo FUNCTION &trans &trans    &trans
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        cursor_layer {
-            bindings = <
-                &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp BSPC
-                &trans    &none     &none     &none     &none     &none     &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
-                &trans    &none     &none     &none     &none     &none     &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &trans
-                &trans    &trans    &trans    &mo FUNCTION &trans &none     &none     &trans    &trans    &trans    &trans    &trans
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        function_layer {
-            bindings = <
-                &none        &kp F1       &kp F2       &kp F3       &kp F4       &kp F5       &kp F6       &kp F7       &kp F8       &kp F9       &kp F10      &kp F11
-                &out OUT_TOG &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &none        &none        &none        &none        &none        &kp F12
-                &bt BT_CLR   &none        &none        &none        &none        &none        &none        &none        &none        &none        &none        &none
-                &trans       &trans       &trans       &trans       &trans       &none        &none        &trans       &trans       &trans       &trans       &trans
-            >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-    };
-}; // ルートノード終了
-
-// リスナー設定 (ルートの外側に配置)
 &msc_input_listener {
     speed_up {
         layers = <FUNCTION>;
-        input-processors = <&zip_wheel_scaler 3 1>;
+        input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
     };
 };
 
@@ -144,16 +57,204 @@
     scroller {
         layers = <SCROLL>;
         input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_to_scroll_mapper>,
+            <&zip_xy_to_scroll_mapper>;
             <&scroll_runtime_input_processor>;
     };
+
     boost {
         layers = <7>;
         input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_scaler 3 2>,
-            <&zip_xy_to_scroll_mapper>,
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
+            <&zip_xy_scaler 3 2>;
+            <&zip_xy_to_scroll_mapper>;
             <&scroll_runtime_input_processor>;
+    };
+};
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        InsertKey {
+            bindings = <&kp INS>;
+            key-positions = <6 7>;
+        };
+
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <0 1>;
+        };
+
+        bs {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <8 9>;
+        };
+
+        pirri {
+            bindings = <&kp PERIOD>;
+            key-positions = <7 8>;
+        };
+
+        conma {
+            bindings = <&kp COMMA>;
+            key-positions = <6 7>;
+        };
+
+        win {
+            bindings = <&kp LEFT_WIN>;
+            key-positions = <31 32>;
+        };
+
+        del {
+            bindings = <&kp DELETE>;
+            key-positions = <4 3>;
+        };
+
+        mb3 {
+            bindings = <&mkp MB3>;
+            key-positions = <16 17>;
+        };
+
+        mb2 {
+            bindings = <&mkp MB2>;
+            key-positions = <17 18>;
+        };
+
+        LANG01 {
+            bindings = <&kp LANGUAGE_1>;
+            key-positions = <0 10>;
+        };
+    };
+
+
+/ {
+    // 【重要】センサー（エンコーダー）の有効化宣言
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder &right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
+
+    behaviors {
+        re_kp: sensor_rotate_kp {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        mouse_scrl: mouse_wheel_scrl {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+
+            tap-ms = <20>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&kp Q             &kp W             &kp E           &kp R    &kp T                                         &kp Y             &kp U  &kp I             &kp O              &kp P
+&kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 MINUS
+&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 ENTER
+&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
+            >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        //1
+
+        MOUSE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
+            >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        //2
+
+        NUMB {
+            bindings = <
+&kp ASTERISK  &kp PLUS     &kp N7     &kp N8  &kp N9                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH         &kp AMPERSAND  &kp AT_SIGN
+&kp PERIOD    &kp N0       &kp N4     &kp N5  &kp N6                               &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp EXCLAMATION  &kp QUESTION   &kp UNDERSCORE
+&kp SLASH     &kp MINUS    &kp N1     &kp N2  &kp N3                               &kp LESS_THAN         &kp GREATER_THAN       &kp UNDERSCORE   &kp MINUS      &trans
+&kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LBRC         &kp RBRC       &kp LS(QUESTION)
+            >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        //3
+
+        CURSOR {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &kp DOWN_ARROW  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans          &trans
+            >;
+        };
+
+        //4
+
+        FUNCTION {
+            bindings = <
+&kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans  &trans  &trans  &trans  &trans
+&kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans  &trans  &trans  &trans  &trans
+&kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &trans  &trans  &trans  &trans  &trans
+&kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans          &trans  &trans  &trans
+
+
+      >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        //5
+
+        SCROLL {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+            >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        //6
+
+        WIRELESS {
+            bindings = <
+&bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                         &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans          &trans        &trans        &trans        &trans                               &trans          &trans        &trans        &trans        &trans
+&trans          &trans        &trans        &trans        &trans                               &trans          &trans        &trans        &trans        &bt BT_CLR
+&studio_unlock  &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
+            >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        layer_7 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+            >;
+
+sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        };
     };
 };
