@@ -126,7 +126,7 @@
     };
 
 
-/ {
+
 
 keymap {
         compatible = "zmk,keymap";
