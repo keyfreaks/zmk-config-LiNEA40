@@ -12,5 +12,9 @@
 };
 
 &left_encoder {
-   status = "okay";
+    status = "okay";
+    // Seeeduino Xiao BLE のピンアサインに合わせて D4, D5 を指定
+    // もし配線が異なる場合はここを調整してください
+    a-gpios = <&xiao_d 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    b-gpios = <&xiao_d 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 };
