@@ -1,4 +1,4 @@
-ｐ#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -15,7 +15,7 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
-#define layer_7 7 
+#define layer_7 7
 
 //mouse cursol
 
@@ -49,7 +49,7 @@
     msc_input_listener: msc_input_listener {
         speed_up {
             layers = <FUNCTION>;
-            input-processors = <&zip_wheel_scaler 3 1>;
+            input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
         };
     };
 
@@ -60,7 +60,6 @@
             input-processors =
                 <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
                 <&zip_xy_to_scroll_mapper>,
-                <&zip_xy_scaler 3 2>,
                 <&scroll_runtime_input_processor>;
         };
 
@@ -73,7 +72,6 @@
                 <&scroll_runtime_input_processor>;
         };
     };
-
 
     combos {
         compatible = "zmk,combos";
@@ -130,14 +128,7 @@
     };
 
 
-        // 【重要】センサー（エンコーダー）の有効化宣言
-sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <20>;
-    };
-
-behaviors {
+    behaviors {
         re_kp: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
@@ -242,9 +233,8 @@ behaviors {
 &studio_unlock  &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
             >;
 
-        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-    };
 
         layer_7 {
             bindings = <
@@ -254,7 +244,7 @@ behaviors {
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         };
