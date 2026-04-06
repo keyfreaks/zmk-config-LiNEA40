@@ -178,9 +178,9 @@
 
         FUNCTION {
             bindings = <
-&kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans      &trans  &trans         &trans  &kp LC(LA(DELETE))
-&kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans      &trans  &kp LS(LG(S))  &trans  &kp LC(LS(ESCAPE))
-&kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &kp C_MUTE  &trans  &trans         &trans  &kp LC(LA(INS))
+&kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans      &trans  &trans         &trans  &trans
+&kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans      &trans  &trans         &trans  &trans
+&kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &trans      &trans  &trans         &trans  &trans
 &kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans              &trans         &trans  &trans
             >;
 
