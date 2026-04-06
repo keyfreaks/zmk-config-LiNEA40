@@ -125,17 +125,6 @@
         };
     };
 
-   macros {
-        // "nomura_6980" 
-        mcr01: mcr01 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <30>;
-            wait-ms = <30>;
-            bindings = <&kp N &kp O &kp M &kp U &kp R &kp A &kp UNDERSCORE &kp N6 &kp N9 &kp N8 &kp N0>;
-              };
-　　      };
-
 
 keymap {
         compatible = "zmk,keymap";
