@@ -58,7 +58,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
 
         input-processors = <&mouse_runtime_input_processor>;
@@ -95,7 +95,7 @@
 
         conma {
             bindings = <&kp COMMA>;
-            key-positions = <17 18>;
+            key-positions = <6 6 7>;
         };
 
         win {
@@ -106,6 +106,16 @@
         del {
             bindings = <&kp DELETE>;
             key-positions = <4 3>;
+        };
+
+        mb3 {
+            bindings = <&mkp MB3>;
+            key-positions = <16 17>;
+        };
+
+        mb2 {
+            bindings = <&mkp MB2>;
+            key-positions = <17 18>;
         };
     };
 
@@ -167,10 +177,10 @@
 
         CURSOR {
             bindings = <
-&trans          &trans        &trans        &trans        &trans                           &trans          &trans        &trans        &trans        &trans 
-&trans          &trans        &trans        &trans        &trans                           &trans          &trans        &trans        &trans        &trans 
-&trans          &trans        &trans        &trans        &trans                           &trans          &trans        &trans        &trans        &trans 
-&trans          &trans        &trans        &trans        &trans   &trans       &trans     &trans          &trans        &trans        &trans        &trans 
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
         };
 
@@ -178,10 +188,10 @@
 
         FUNCTION {
             bindings = <
-&kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans      &trans  &trans         &trans  &trans
-&kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans      &trans  &trans         &trans  &trans
-&kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &trans      &trans  &trans         &trans  &trans
-&kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans              &trans         &trans  &trans
+&kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans  &trans  &trans  &trans  &trans
+&kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans  &trans  &trans  &trans  &trans
+&kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &trans  &trans  &trans  &trans  &trans
+&kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
