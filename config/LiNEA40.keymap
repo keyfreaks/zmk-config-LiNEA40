@@ -127,6 +127,16 @@
         };
     };
 
+
+/ {
+    // 【重要】センサー（エンコーダー）の有効化宣言
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder &right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
+
     behaviors {
         re_kp: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
@@ -154,7 +164,7 @@
 &mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         //1
@@ -166,6 +176,8 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
             >;
+
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         //2
@@ -178,7 +190,7 @@
 &kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LBRC         &kp RBRC       &kp LS(QUESTION)
             >;
 
-            sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         //3
@@ -202,7 +214,7 @@
 &kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         //5
@@ -215,7 +227,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         //6
@@ -228,7 +240,7 @@
 &studio_unlock  &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
             >;
 
-            sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
+           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         layer_7 {
