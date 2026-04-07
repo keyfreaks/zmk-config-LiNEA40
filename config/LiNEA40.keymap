@@ -123,7 +123,9 @@
 &mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&mouse_scrl SCRL_UP SCRL_DOWN>,
+                <&inc_dec_kp PG_UP PG_DN>;
         };
 
         MOUSE {
