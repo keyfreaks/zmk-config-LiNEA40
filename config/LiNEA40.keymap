@@ -46,8 +46,6 @@
     combos {
         compatible = "zmk,combos";
 
-};
-
         esc {
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
