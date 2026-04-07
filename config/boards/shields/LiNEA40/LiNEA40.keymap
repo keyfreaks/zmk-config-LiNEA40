@@ -42,10 +42,9 @@
 };
 
 / {
-    combos {
-        compatible = "zmk,combos";
 
-};
+ combos {
+        compatible = "zmk,combos";
 
         esc {
             bindings = <&kp ESCAPE>;
