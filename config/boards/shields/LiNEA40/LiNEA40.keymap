@@ -48,11 +48,6 @@
     combos {
         compatible = "zmk,combos";
 
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
-
         esc {
             bindings = <&kp ESCAPE>;
             key-positions = <0 1>;
@@ -96,6 +91,11 @@
         LANG01 {
             bindings = <&kp LANGUAGE_1>;
             key-positions = <0 10>;
+        };
+
+        BOOST {
+            bindings = <&mo 7>;
+            key-positions = <18 19>;
         };
     };
 
