@@ -15,7 +15,8 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
-#define layer_7 7
+
+//mouse cursol
 
 &mmv {
     delay-ms = <20>;
@@ -23,6 +24,8 @@
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <2>;
 };
+
+//mouse scroll
 
 &msc {
     delay-ms = <3>;
@@ -32,6 +35,42 @@
 };
 
 / {
+    input_processors {
+        zip_wheel_scaler: zip_wheel_scaler {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_WHEEL>;
+            track-remainders;
+        };
+    };
+
+    msc_input_listener {
+        speed_up {
+            layers = <FUNCTION>;
+            input-processors = <&zip_wheel_scaler 3 1>;
+        };
+    };
+
+    trackball_listener {
+        scroller {
+            layers = <SCROLL>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_to_scroll_mapper>,
+                <&scroll_runtime_input_processor>;
+        };
+
+        boost {
+            layers = <7>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_scaler 3 2>,
+                <&zip_xy_to_scroll_mapper>,
+                <&scroll_runtime_input_processor>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
 
@@ -84,11 +123,6 @@
             bindings = <&kp LANGUAGE_1>;
             key-positions = <0 10>;
         };
-
-        BOOST {
-            bindings = <&mo 7>;
-            key-positions = <18 19>;
-        };
     };
 
     behaviors {
@@ -113,14 +147,12 @@
         default_layer {
             bindings = <
 &kp Q             &kp W             &kp E           &kp R    &kp T                                         &kp Y             &kp U  &kp I             &kp O              &kp P
-&kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 ENTER
-&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 MINUS
-&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_1  &lt 3 LANGUAGE_2         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 5 BACKSPACE
+&kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 MINUS
+&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 ENTER
+&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-            sensor-bindings =
-                <&mouse_scrl SCRL_UP SCRL_DOWN>,
-                <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         MOUSE {
@@ -128,7 +160,7 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &mo 5
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -136,10 +168,10 @@
 
         NUMB {
             bindings = <
-&kp ASTERISK  &kp PLUS     &kp N7     &kp N8  &kp N9                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH         &kp AMPERSAND    &kp AT_SIGN
-&kp PERIOD    &kp N0       &kp N4     &kp N5  &kp N6                               &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp EXCLAMATION  &kp QUESTION     &kp UNDERSCORE
-&kp SLASH     &kp MINUS    &kp N1     &kp N2  &kp N3                               &kp LESS_THAN         &kp GREATER_THAN       &kp UNDERSCORE   &kp MINUS        &trans
-&kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LEFT_ARROW   &kp RIGHT_ARROW  &kp LS(QUESTION)
+&kp ASTERISK  &kp PLUS     &kp N7     &kp N8  &kp N9                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH         &kp AMPERSAND  &kp AT_SIGN
+&kp PERIOD    &kp N0       &kp N4     &kp N5  &kp N6                               &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp EXCLAMATION  &kp QUESTION   &kp UNDERSCORE
+&kp SLASH     &kp MINUS    &kp N1     &kp N2  &kp N3                               &kp LESS_THAN         &kp GREATER_THAN       &kp UNDERSCORE   &kp MINUS      &trans
+&kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LBRC         &kp RBRC       &kp LS(QUESTION)
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -152,8 +184,6 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans          &trans
             >;
-
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP K_VOLUME_DOWN>;
         };
 
         FUNCTION {
