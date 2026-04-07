@@ -16,16 +16,12 @@
 #define SCROLL 5
 #define WIRELESS 6
 
-//mouse cursol
-
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <2>;
 };
-
-//mouse scroll
 
 &msc {
     delay-ms = <3>;
