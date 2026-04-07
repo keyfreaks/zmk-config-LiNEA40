@@ -35,15 +35,8 @@
     acceleration-exponent = <0>;
 };
 
-&trackball_listener {
-    compatible = "zmk,input-listener";
-    status = "okay";
-    input-processors = <&mouse_runtime_input_processor>;
-};
-
 / {
-
- combos {
+    combos {
         compatible = "zmk,combos";
 
         esc {
@@ -124,8 +117,7 @@
 &mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-                        sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         MOUSE {
@@ -137,7 +129,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
 
         NUMB {
@@ -149,7 +140,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
 
         CURSOR {
@@ -161,7 +151,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
 
         FUNCTION {
@@ -173,7 +162,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
 
         SCROLL {
@@ -183,8 +171,8 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         WIRELESS {
@@ -196,7 +184,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
 
         layer_7 {
@@ -208,7 +195,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-
         };
     };
 };
