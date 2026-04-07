@@ -45,8 +45,39 @@
         };
     };
 
+    msc_input_listener {
+        speed_up {
+            layers = <FUNCTION>;
+            input-processors = <&zip_wheel_scaler 3 1>;
+        };
+    };
+
+    trackball_listener {
+        scroller {
+            layers = <SCROLL>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_to_scroll_mapper>,
+                <&scroll_runtime_input_processor>;
+        };
+
+        boost {
+            layers = <7>;
+            input-processors =
+                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+                <&zip_xy_scaler 3 2>,
+                <&zip_xy_to_scroll_mapper>,
+                <&scroll_runtime_input_processor>;
+        };
+    };
+
     combos {
         compatible = "zmk,combos";
+
+        InsertKey {
+            bindings = <&kp INS>;
+            key-positions = <6 7>;
+        };
 
         esc {
             bindings = <&kp ESCAPE>;
@@ -92,11 +123,6 @@
             bindings = <&kp LANGUAGE_1>;
             key-positions = <0 10>;
         };
-
-        BOOST {
-            bindings = <&mo 7>;
-            key-positions = <18 19>;
-        };
     };
 
     behaviors {
@@ -126,10 +152,8 @@
 &mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-
-        //1
 
         MOUSE {
             bindings = <
@@ -139,10 +163,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-
-        //2
 
         NUMB {
             bindings = <
@@ -152,10 +174,8 @@
 &kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LBRC         &kp RBRC       &kp LS(QUESTION)
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-
-        //3
 
         CURSOR {
             bindings = <
@@ -166,22 +186,16 @@
             >;
         };
 
-        //4
-
         FUNCTION {
             bindings = <
 &kp F1      &kp F2      &kp F3      &kp F4      &kp F5                        &trans  &trans  &trans  &trans  &trans
 &kp F6      &kp F7      &kp F8      &kp F9      &kp F10                       &trans  &trans  &trans  &trans  &trans
 &kp F11     &kp F12     &kp LS(F1)  &kp LS(F2)  &kp LS(F3)                    &trans  &trans  &trans  &trans  &trans
 &kp LS(F4)  &kp LS(F5)  &kp LS(F6)  &kp LS(F7)  &kp LS(F8)  &trans    &trans  &trans          &trans  &trans  &trans
+            >;
 
-
-      >;
-
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-
-        //5
 
         SCROLL {
             bindings = <
@@ -191,10 +205,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-
-        //6
 
         WIRELESS {
             bindings = <
@@ -204,7 +216,7 @@
 &studio_unlock  &trans        &trans        &trans        &trans        &trans    &bootloader  &studio_unlock                &trans        &trans        &bt BT_CLR_ALL
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         layer_7 {
@@ -215,7 +227,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
             >;
 
-           sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
     };
 };
