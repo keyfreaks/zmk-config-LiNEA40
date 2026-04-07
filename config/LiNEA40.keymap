@@ -113,12 +113,14 @@
         default_layer {
             bindings = <
 &kp Q             &kp W             &kp E           &kp R    &kp T                                         &kp Y             &kp U  &kp I             &kp O              &kp P
-&kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 MINUS
-&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 ENTER
-&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
+&kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 ENTER
+&mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 MINUS
+&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_1  &lt 3 LANGUAGE_2         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 5 BACKSPACE
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>,
+                <&inc_dec_kp PG_UP PG_DN>;
         };
 
         MOUSE {
@@ -134,10 +136,10 @@
 
         NUMB {
             bindings = <
-&kp ASTERISK  &kp PLUS     &kp N7     &kp N8  &kp N9                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH         &kp AMPERSAND  &kp AT_SIGN
-&kp PERIOD    &kp N0       &kp N4     &kp N5  &kp N6                               &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp EXCLAMATION  &kp QUESTION   &kp UNDERSCORE
-&kp SLASH     &kp MINUS    &kp N1     &kp N2  &kp N3                               &kp LESS_THAN         &kp GREATER_THAN       &kp UNDERSCORE   &kp MINUS      &trans
-&kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LBRC         &kp RBRC       &kp LS(QUESTION)
+&kp ASTERISK  &kp PLUS     &kp N7     &kp N8  &kp N9                               &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp HASH         &kp AMPERSAND    &kp AT_SIGN
+&kp PERIOD    &kp N0       &kp N4     &kp N5  &kp N6                               &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp EXCLAMATION  &kp QUESTION     &kp UNDERSCORE
+&kp SLASH     &kp MINUS    &kp N1     &kp N2  &kp N3                               &kp LESS_THAN         &kp GREATER_THAN       &kp UNDERSCORE   &kp MINUS        &trans
+&kp COLON     &kp PERCENT  &kp EQUAL  &trans  &trans  &kp BACKSPACE    &kp DELETE  &trans                                       &kp LEFT_ARROW   &kp RIGHT_ARROW  &kp LS(QUESTION)
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -150,6 +152,8 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans          &trans
             >;
+
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP K_VOLUME_DOWN>;
         };
 
         FUNCTION {
