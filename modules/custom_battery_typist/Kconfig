@@ -1,0 +1,6 @@
+if ZMK_BEHAVIOR_BATTERY_TYPE
+
+config ZMK_BEHAVIOR_BATTERY_TYPE
+    bool "Custom Battery Type Behavior"
+
+endif
