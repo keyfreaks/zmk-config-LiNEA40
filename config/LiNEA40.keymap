@@ -15,6 +15,7 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
+#define layer_7 7
 
 &mmv {
     delay-ms = <20>;
@@ -119,12 +120,10 @@
 &kp Q             &kp W             &kp E           &kp R    &kp T                                         &kp Y             &kp U  &kp I             &kp O              &kp P
 &kp A             &kp S             &kp D           &kp F    &kp G                                         &kp H             &kp J  &kp K             &kp L              &lt 3 MINUS
 &mt LEFT_SHIFT Z  &kp X             &kp C           &kp V    &kp B                                         &kp N             &kp M  &kp COMMA         &kp PERIOD         &lt 2 ENTER
-&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_1  &lt 3 LANGUAGE_2         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
+&mt LCTRL ESC     &mt LEFT_ALT TAB  &lt 5 CAPSLOCK  &kp INS  &lt 2 SPACE  &lt 4 ENTER    &lt 4 LANGUAGE_2  &lt 3 LANGUAGE_1         &lt 6 LEFT_ARROW  &lt 5 RIGHT_ARROW  &lt 7 BACKSPACE
             >;
 
-            sensor-bindings =
-                <&mouse_scrl SCRL_UP SCRL_DOWN>,
-                <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         MOUSE {
@@ -132,7 +131,7 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &mo 7
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans  &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -151,10 +150,10 @@
 
         CURSOR {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans           &trans       &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW
-&trans  &trans  &trans  &trans  &trans                    &mkp MB4         &mkp MB5     &trans          &kp DOWN_ARROW  &kp C_VOLUME_UP
-&trans  &trans  &trans  &trans  &trans                    &kp LS(LC(TAB))  &kp LC(TAB)  &trans          &trans          &kp C_VOLUME_DOWN
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans                        &trans          &trans          &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &kp DOWN_ARROW  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans          &trans
             >;
         };
 
