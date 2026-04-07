@@ -45,32 +45,6 @@
         };
     };
 
-    msc_input_listener {
-        speed_up {
-            layers = <FUNCTION>;
-            input-processors = <&zip_wheel_scaler 3 1>;
-        };
-    };
-
-    trackball_listener {
-        scroller {
-            layers = <SCROLL>;
-            input-processors =
-                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-                <&zip_xy_to_scroll_mapper>,
-                <&scroll_runtime_input_processor>;
-        };
-
-        boost {
-            layers = <7>;
-            input-processors =
-                <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-                <&zip_xy_scaler 3 2>,
-                <&zip_xy_to_scroll_mapper>,
-                <&scroll_runtime_input_processor>;
-        };
-    };
-
     combos {
         compatible = "zmk,combos";
 
@@ -229,5 +203,31 @@
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
+    };
+};
+
+&trackball_listener {
+    scroller {
+        layers = <SCROLL>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>;
+    };
+
+    boost {
+        layers = <7>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_scaler 3 2>,
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>;
+    };
+};
+
+&msc_input_listener {
+    speed_up {
+        layers = <FUNCTION>;
+        input-processors = <&zip_wheel_scaler 3 1>;
     };
 };
