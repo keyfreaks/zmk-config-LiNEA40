@@ -69,6 +69,12 @@
         };
     };
 
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <8>;
+    };
+
     combos {
         compatible = "zmk,combos";
 
