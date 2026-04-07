@@ -17,12 +17,16 @@
 #define WIRELESS 6
 #define layer_7 7
 
+//mouse cursor
+
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
     time-to-max-speed-ms = <100>;
     acceleration-exponent = <2>;
 };
+
+//mouse scroll
 
 &msc {
     delay-ms = <3>;
@@ -31,24 +35,17 @@
     acceleration-exponent = <0>;
 };
 
-/ {
-    input_processors {
-        zip_wheel_scaler: zip_wheel_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL>;
-            track-remainders;
-        };
-    };
+&trackball_listener {
+    compatible = "zmk,input-listener";
+    status = "okay";
+    input-processors = <&mouse_runtime_input_processor>;
+};
 
+/ {
     combos {
         compatible = "zmk,combos";
 
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
+};
 
         esc {
             bindings = <&kp ESCAPE>;
@@ -96,6 +93,12 @@
         };
     };
 
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <8>;
+    };
+
     behaviors {
         re_kp: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
@@ -107,7 +110,6 @@
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
-
             tap-ms = <20>;
         };
     };
@@ -155,6 +157,8 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans          &trans
             >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         FUNCTION {
@@ -200,31 +204,5 @@
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
-    };
-};
-
-&trackball_listener {
-    scroller {
-        layers = <SCROLL>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_to_scroll_mapper>,
-            <&scroll_runtime_input_processor>;
-    };
-
-    boost {
-        layers = <7>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            <&zip_xy_scaler 3 2>,
-            <&zip_xy_to_scroll_mapper>,
-            <&scroll_runtime_input_processor>;
-    };
-};
-
-&msc_input_listener {
-    speed_up {
-        layers = <FUNCTION>;
-        input-processors = <&zip_wheel_scaler 3 1>;
     };
 };
