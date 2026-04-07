@@ -15,6 +15,7 @@
 #define FUNCTION 4
 #define SCROLL 5
 #define WIRELESS 6
+#define layer_7 7
 
 &mmv {
     delay-ms = <20>;
