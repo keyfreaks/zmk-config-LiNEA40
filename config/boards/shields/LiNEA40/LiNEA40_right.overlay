@@ -53,7 +53,7 @@
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
-        settings-id = "trackball";
+        settings-id = "ball";   // 8文字以内
         // 旧ドライバーの automouse-layer / snipe-layers / scroll-layers は
         // 新ドライバーには無いため、下の input-processor で置き換える。
     };
