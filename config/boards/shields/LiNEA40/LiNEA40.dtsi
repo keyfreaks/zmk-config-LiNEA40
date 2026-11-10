@@ -1,5 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors.dtsi>
 
 / {
     chosen {
@@ -99,3 +101,7 @@
         status = "disabled";
     };
 };
+
+// keymap (左右共通) の scroller から参照されるため、左右両方で読み込む。
+// keys.h が RC() を再定義するので、matrix transform より後に置くこと。
+#include <input/processors/runtime-input-processor.dtsi>
