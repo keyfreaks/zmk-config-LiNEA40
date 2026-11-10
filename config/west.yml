@@ -4,8 +4,6 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: cormoran
       url-base: https://github.com/cormoran
-    - name: inorichi
-      url-base: https://github.com/inorichi
     - name: caksoylar
       url-base: https://github.com/caksoylar
   projects:
@@ -42,9 +40,12 @@ manifest:
           - openthread
           - edtt
           - trusted-firmware-m
-    - name: zmk-pmw3610-driver
-      remote: inorichi
-      revision: 1d9c2c68ca76012e1b1e5f6ef02fa5eadc4ca399  # track: main
+    # PMW3610 driver: badjeff-style input-subsystem driver with DYA Studio
+    # custom RPC (surface diagnostics). compatible = "cormoran,pmw3610".
+    # Replaces inorichi/zmk-pmw3610-driver; do not use both.
+    - name: zmk-driver-pmw3610-with-custom-studio-rpc
+      remote: cormoran
+      revision: 5c34ea0eec246a1c986111417cd779b53144629a  # track: main
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: 8756cb7b8114069fa3c25c6f6c990f24988fceff  # track: v0.3-branch
@@ -65,5 +66,18 @@ manifest:
     - name: zmk-module-battery-history
       remote: cormoran
       revision: 307755dd2ad4d320e14de162e8e5ef018f29d929  # track: main
+    # DYA Studio diagnostics modules. No v0.3 tags exist; pinned main SHAs.
+    - name: zmk-feature-device-info
+      remote: cormoran
+      revision: 8cedd2dd9f04e19ea5a17b94914dd47a09d8db11  # track: main
+    - name: zmk-feature-watchdog
+      remote: cormoran
+      revision: 84ad14c6c3645dc40b23f45d08ab45418655f912  # track: main
+    - name: zmk-feature-kscan-diagnostics
+      remote: cormoran
+      revision: 1432f7fe0cfe903cd7d3c9931ae6bd6f2e1f328e  # track: main
+    - name: zmk-module-devtool
+      remote: cormoran
+      revision: 9938a2c73c06d6e65ba2c0b68c9aa044a467eafc  # track: main
   self:
     path: config

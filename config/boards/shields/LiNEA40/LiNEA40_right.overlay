@@ -1,4 +1,7 @@
 #include "LiNEA40.dtsi"
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 &default_transform {
     col-offset = <6>;
 };
@@ -11,14 +14,6 @@
         , <&xiao_d 7 GPIO_ACTIVE_HIGH>  //col3-D7
         , <&gpio0 10 GPIO_ACTIVE_HIGH>  //col4-NFC2
         ;
-};
-
-/ {
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-    };
 };
 
 
@@ -53,18 +48,43 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610";
+        compatible = "cormoran,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT-D6
-        automouse-layer = <1>;
-        snipe-layers = <2>;
-        scroll-layers = <5>;
-        //scroll-layers = <4 5 6>;
+        cpi = <800>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+        settings-id = "trackball";
+        // 旧ドライバーの automouse-layer / snipe-layers / scroll-layers は
+        // 新ドライバーには無いため、下の input-processor で置き換える。
     };
 };
 
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
+    // DYA Studio のトラックボール設定（速度・回転・反転・オートマウス）
+    input-processors = <&mouse_runtime_input_processor>;
+
+    // スナイプ（旧 snipe-layers = <2>, CPI 800 -> 400 相当）
+    snipe {
+        layers = <2>;
+        input-processors = <&zip_xy_scaler 1 2>;
+        process-next;   // 続けて mouse_runtime_input_processor も適用
+    };
+};
+
+// オートマウス（旧 automouse-layer = <1>, AUTOMOUSE_TIMEOUT_MS=600 相当）
+// DYA Studio から実行時に変更可能。
+&mouse_runtime_input_processor {
+    temp-layer-enabled;
+    temp-layer = <1>;
+    temp-layer-deactivation-delay-ms = <600>;
+};
+
+// スクロール（keymap の scroller から参照。旧 SCROLL_TICK=2 相当）
+&scroll_runtime_input_processor {
+    scale-divisor = <2>;
 };
