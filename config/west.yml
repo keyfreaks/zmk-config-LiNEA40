@@ -7,18 +7,19 @@ manifest:
     - name: caksoylar
       url-base: https://github.com/caksoylar
   projects:
-    # cormoran's ZMK fork (v0.3 / Zephyr 3.5 base) with DYA Studio support.
+    # DYA Studio 開発者ガイド推奨: cormoran/zmk#main+dya (ZMK v0.4 系 / Zephyr 4.1)
+    # と cormoran/zephyr#v4.1.0+zmk-fixes+nrf-half-duplex-uart の組み合わせ
+    # (DYA2 と同じ)。ガイドに従い動作確認済み revision に SHA で pin する。
     - name: zmk
       remote: cormoran
-      revision: 4493783ef88ce2e653bf8217c92ee17140df71e3  # track: v0.3-branch+dya
+      revision: e5c9b6915b56801193e359dd9bad4a167ce0d1b8  # track: main+dya
       import: app/west.yml
-    # Zephyr override: zmk/app/west.yml pins zephyr by *branch* name, so it is
-    # redeclared here to freeze it. Keep clone-depth and name-blocklist identical
-    # to zmk/app/west.yml; only `revision` differs. Mirror upstream changes when
-    # bumping zmk.
+    # Zephyr override (ガイド推奨の cormoran 版)。zmk/app/west.yml は zephyr を
+    # branch 名で指定するため、ここで再宣言して固定する。clone-depth と
+    # name-blocklist は zmk/app/west.yml と同じにし、remote/revision だけ変える。
     - name: zephyr
-      remote: zmkfirmware
-      revision: dacab4875df72109b96cc8977547a0dc04875bcd  # track: v3.5.0+zmk-fixes
+      remote: cormoran
+      revision: 63363d92c475ad203b35e9047cef7ecd8706a6fc  # track: v4.1.0+zmk-fixes+nrf-half-duplex-uart
       clone-depth: 1
       import:
         name-blocklist:
@@ -29,7 +30,6 @@ manifest:
           - hal_microchip
           - hal_nxp
           - hal_openisa
-          - hal_silabs
           - hal_xtensa
           - hal_st
           - hal_ti
@@ -40,38 +40,53 @@ manifest:
           - openthread
           - edtt
           - trusted-firmware-m
-    # PMW3610 driver: badjeff-style input-subsystem driver with DYA Studio
-    # custom RPC (surface diagnostics). compatible = "cormoran,pmw3610".
-    # Replaces inorichi/zmk-pmw3610-driver; do not use both.
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: e6b467792a1dabef8cfa5c9fd26bfefc9c16662b  # track: main (Zephyr 4.1)
+
+    # ---- DYA Studio modules (cormoran, main = main+dya 対応) ----
+    # Trackball: PMW3610 driver (custom Studio RPC) + runtime input processor
     - name: zmk-driver-pmw3610-with-custom-studio-rpc
       remote: cormoran
       revision: 5c34ea0eec246a1c986111417cd779b53144629a  # track: main
-    - name: zmk-rgbled-widget
-      remote: caksoylar
-      revision: 8756cb7b8114069fa3c25c6f6c990f24988fceff  # track: v0.3-branch
-    # DYA Studio modules (cormoran), pinned to v0.3-compatible tags/SHAs.
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: zmk-v0.3.0.0  # track: tags
-    - name: zmk-behavior-runtime-sensor-rotate
+      revision: decf628d7ce5ed95b520c650824c28ea9de649c1  # track: main
+    # Settings / connection
+    - name: zmk-feature-custom-settings
       remote: cormoran
-      revision: zmk-v0.3.0.0  # track: tags
-    - name: zmk-module-ble-management
+      revision: c6a7fef3a3be3d3ace5de9a4b0628c6418cd1f3f  # track: main
+    - name: zmk-feature-fast-keymap
       remote: cormoran
-      revision: zmk-v0.3.0.0  # track: tags
+      revision: 21d9af3c2ad694f823ad007b361b091c1e366eee  # track: main
     - name: zmk-module-settings-rpc
       remote: cormoran
-      revision: zmk-v0.3.0.0  # track: tags
-    # No v0.3 tag exists; this main SHA is known to build on v0.3-branch+dya.
-    - name: zmk-module-battery-history
+      revision: 78f86df9e6c5edaf57bef3ccbd7f360cfdf49291  # track: main
+    - name: zmk-module-ble-management
       remote: cormoran
-      revision: 307755dd2ad4d320e14de162e8e5ef018f29d929  # track: main
-    # DYA Studio diagnostics. kscan-diagnostics builds on v0.3-branch+dya.
+      revision: 57738cc4fc6ba80e82a7ac57741a0339cb186cd4  # track: main
+    # Keymap: combo / macro / tap-dance lists, rotary encoder
+    - name: zmk-feature-runtime-combo
+      remote: cormoran
+      revision: d9490e7b5d41c516221d131241009e81740efcee  # track: main
+    - name: zmk-feature-runtime-macro
+      remote: cormoran
+      revision: 38530962eb7061b60efcb98e84585cfb1f0cb6de  # track: main
+    - name: zmk-feature-runtime-tapdance
+      remote: cormoran
+      revision: 3ed2c36ed94b16601eeba2ed39a27cc93e9a53ee  # track: main
+    - name: zmk-behavior-runtime-sensor-rotate
+      remote: cormoran
+      revision: 8b1125ed676c1f5e14145d217984f33d0ebdcef4  # track: main
+    # Diagnostics (support report: Device Info / Watchdog / Key Switches)
+    - name: zmk-feature-device-info
+      remote: cormoran
+      revision: 8cedd2dd9f04e19ea5a17b94914dd47a09d8db11  # track: main
+    - name: zmk-feature-watchdog
+      remote: cormoran
+      revision: 84ad14c6c3645dc40b23f45d08ab45418655f912  # track: main
     - name: zmk-feature-kscan-diagnostics
       remote: cormoran
       revision: 1432f7fe0cfe903cd7d3c9931ae6bd6f2e1f328e  # track: main
-    # NOT usable on v0.3 (Zephyr 3.5): zmk-feature-device-info (zephyr/version.h),
-    # zmk-feature-watchdog (struct arch_esf), zmk-module-devtool
-    # (zmk_keymap_layer_activate signature). They require main+dya (Zephyr 4.1).
   self:
     path: config

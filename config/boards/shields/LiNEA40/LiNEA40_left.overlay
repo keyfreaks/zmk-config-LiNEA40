@@ -1,5 +1,11 @@
 #include "LiNEA40.dtsi"
 
+// Zephyr 4.1: CONFIG_NFCT_PINS_AS_GPIOS は廃止され devicetree で指定する。
+// NFC1(P0.09) / NFC2(P0.10) を GPIO として使うため必須。
+&uicr {
+    nfct-pins-as-gpios;
+};
+
 &kscan0 {
     col-gpios
         = <&xiao_d 10 GPIO_ACTIVE_HIGH> //col0-D10

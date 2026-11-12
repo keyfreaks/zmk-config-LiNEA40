@@ -2,5 +2,5 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    # Pinned to the same cormoran/zmk commit as config/west.yml (v0.3-branch+dya, Zephyr 3.5).
-    uses: cormoran/zmk/.github/workflows/build-user-config.yml@4493783ef88ce2e653bf8217c92ee17140df71e3
+    # Pinned to the same cormoran/zmk commit as config/west.yml (main+dya = ZMK v0.4 line, Zephyr 4.1).
+    uses: cormoran/zmk/.github/workflows/build-user-config.yml@e5c9b6915b56801193e359dd9bad4a167ce0d1b8
