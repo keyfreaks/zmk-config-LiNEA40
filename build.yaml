@@ -17,3 +17,10 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: xiao_ble//zmk
     shield: settings_reset
+  # Debug build: right half with USB logging (incl. BLE pairing/SMP logs).
+  # Flash only when investigating; Studio over USB is not available in this build.
+  - board: xiao_ble//zmk
+    shield: LiNEA40_right rgbled_adapter
+    snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_BT_SMP_LOG_LEVEL_DBG=y -DCONFIG_BT_KEYS_LOG_LEVEL_DBG=y
+    artifact-name: LiNEA40_right_usb_logging
