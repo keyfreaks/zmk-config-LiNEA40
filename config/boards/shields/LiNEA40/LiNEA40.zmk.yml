@@ -3,10 +3,11 @@ id: LiNEA40
 name: LiNEA40
 type: shield
 url: https://github.com/keyfreaks/zmk-config-LiNEA40
-requires: [seeeduino_xiao_ble]
+requires: [xiao_ble]
 features:
   - keys
   - pointer
+  - studio
 siblings:
   - LiNEA40_left
   - LiNEA40_right

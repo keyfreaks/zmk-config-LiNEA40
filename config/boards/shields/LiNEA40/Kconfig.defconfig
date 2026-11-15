@@ -1,6 +1,6 @@
 if SHIELD_LiNEA40_RIGHT
     config ZMK_KEYBOARD_NAME
-        default "LiNEA40"
+        default "keyFreaksLiNEA40"
     config ZMK_SPLIT_ROLE_CENTRAL
         default y
 endif

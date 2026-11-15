@@ -105,3 +105,9 @@
 // keymap (左右共通) の scroller から参照されるため、左右両方で読み込む。
 // keys.h が RC() を再定義するので、matrix transform より後に置くこと。
 #include <input/processors/runtime-input-processor.dtsi>
+
+// Zephyr 4.1: ボード既定のコンソール用 CDC ACM UART を無効化 (DYA2 / DYA Dash と同じ)。
+// 有効のままだと右手で USB シリアルが 2 つでき、Studio 用ではない方を選ぶと接続できない。
+&board_cdc_acm_uart {
+    status = "disabled";
+};
